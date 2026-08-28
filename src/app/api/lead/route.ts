@@ -1,0 +1,6 @@
+import { NextResponse } from "next/server";
+export async function POST(request: Request) { const body = await request.json(); if (!body.name || !body.business || !body.whatsapp) return NextResponse.json({ error: "Data belum lengkap" }, { status: 400 });
+  if (process.env.RESEND_API_KEY && process.env.LEAD_NOTIFY_EMAIL) { await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: process.env.RESEND_FROM_EMAIL || "FunnelPage <onboarding@resend.dev>", to: [process.env.LEAD_NOTIFY_EMAIL], subject: `Lead baru: ${body.business}`, html: `<p>Nama: ${body.name}</p><p>Bisnis: ${body.business}</p><p>WhatsApp: ${body.whatsapp}</p>` }) }); }
+  if (process.env.META_ACCESS_TOKEN && process.env.META_PIXEL_ID) { await fetch(`https://graph.facebook.com/v20.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: [{ event_name: "Lead", event_time: Math.floor(Date.now() / 1000), action_source: "website", user_data: { client_ip_address: request.headers.get("x-forwarded-for")?.split(",")[0] }, custom_data: { business: body.business } }] }) }); }
+  return NextResponse.json({ ok: true });
+}
