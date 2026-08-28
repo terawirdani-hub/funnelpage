@@ -1,11 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
 @import "tailwindcss";
 
 :root { --ink:#111312; --paper:#f4f0e8; --acid:#d8f45b; --muted:#777b70; --line:#c8c8b9; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia, 'Times New Roman', serif; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:'Playfair Display', Georgia, serif; }
 button, input, select { font:inherit; }
-.sans { font-family:Arial, Helvetica, sans-serif; }
+.sans { font-family:'DM Sans', Arial, Helvetica, sans-serif; }
 .noise { background-image:radial-gradient(#11131212 .7px, transparent .7px); background-size:7px 7px; }
 .marquee { overflow:hidden; white-space:nowrap; border-block:1px solid var(--line); }
 .marquee span { display:inline-block; animation:slide 22s linear infinite; }
@@ -28,3 +29,32 @@ a { color:inherit; text-decoration:none; }
 	article, h1, h2, h3, p { overflow-wrap:anywhere; }
 }
 @media (max-width:700px) { .display { font-size:clamp(3.3rem,17vw,6rem)!important; line-height:.86!important; } }
+
+/* Shared polish for the inline layout surfaces. */
+nav { position:sticky; top:0; z-index:10; background:#f4f0e8eF; backdrop-filter:blur(14px); }
+nav strong { letter-spacing:-.8px; }
+nav a, section:last-child a { position:relative; transition:color .2s ease; }
+nav a::after, section:last-child a::after { content:""; position:absolute; left:0; right:100%; bottom:-6px; height:1px; background:currentColor; transition:right .25s ease; }
+nav a:hover::after, section:last-child a:hover::after { right:0; }
+button, a[style*="background"] { transition:transform .25s ease, box-shadow .25s ease, background .25s ease; }
+button:hover, a[style*="background"]:hover { transform:translateY(-3px); box-shadow:6px 6px 0 #9eaa37; }
+section:first-of-type { min-height:calc(100vh - 73px); display:flex; flex-direction:column; justify-content:center; }
+section:first-of-type h1 { text-wrap:balance; }
+section:first-of-type > div:last-child { width:100%; }
+#cara-kerja article { transition:background .25s ease, transform .25s ease; }
+#cara-kerja article:hover { background:#e9e4d9!important; transform:translateY(-6px); }
+#hasil strong { font-family:'Playfair Display', Georgia, serif; letter-spacing:-3px; }
+section:last-child { background:#e7e2d8; }
+section:last-child strong { letter-spacing:1px; }
+
+@media (max-width:700px) {
+	nav { padding-block:18px!important; }
+	nav strong { font-size:16px!important; }
+	nav a { font-size:9px!important; letter-spacing:.4px!important; }
+	section:first-of-type { min-height:auto; padding-top:92px!important; padding-bottom:74px!important; }
+	section:first-of-type h1 { letter-spacing:-2px!important; }
+	section:first-of-type > div:last-child { gap:26px!important; }
+	section:first-of-type > div:last-child a { max-width:none!important; }
+	#hasil strong { letter-spacing:-1px; }
+	section:last-child { padding-top:34px!important; padding-bottom:34px!important; }
+}
