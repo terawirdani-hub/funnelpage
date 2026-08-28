@@ -16,5 +16,15 @@ label { display:block; margin:0 0 18px; font-size:10px; letter-spacing:1.5px; }
 input { display:block; width:100%; margin-top:8px; padding:16px 0; border:0; border-bottom:1px solid var(--line); background:transparent; outline:0; }
 input:focus { border-bottom-color:var(--ink); }
 a { color:inherit; text-decoration:none; }
-@media (max-width:700px) { nav div { gap:12px!important; font-size:10px!important; } nav { padding-inline:20px!important; } section { grid-template-columns:1fr!important; gap:35px!important; } section[style*="repeat(4"] { grid-template-columns:1fr 1fr!important; } }
+@media (max-width:700px) {
+	nav div { gap:12px!important; font-size:10px!important; }
+	nav { padding-inline:20px!important; }
+	section { grid-template-columns:1fr!important; gap:35px!important; }
+	#cara-kerja > div { grid-template-columns:1fr 1fr!important; }
+	#hasil > div > div { grid-template-columns:1fr!important; gap:28px!important; margin-top:40px!important; }
+	#booking { padding-block:70px!important; }
+	section:last-child { display:block!important; }
+	section:last-child > div:last-child { display:flex; flex-wrap:wrap; gap:12px!important; margin-top:24px; }
+	article, h1, h2, h3, p { overflow-wrap:anywhere; }
+}
 @media (max-width:700px) { .display { font-size:clamp(3.3rem,17vw,6rem)!important; line-height:.86!important; } }
